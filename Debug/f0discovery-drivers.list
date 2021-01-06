@@ -136,9 +136,9 @@ int main(void)
  8000148:	1d3b      	adds	r3, r7, #4
  800014a:	2202      	movs	r2, #2
  800014c:	719a      	strb	r2, [r3, #6]
-	gpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+	gpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_OD;
  800014e:	1d3b      	adds	r3, r7, #4
- 8000150:	2200      	movs	r2, #0
+ 8000150:	2201      	movs	r2, #1
  8000152:	721a      	strb	r2, [r3, #8]
 	gpioLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPPD;
  8000154:	1d3b      	adds	r3, r7, #4
