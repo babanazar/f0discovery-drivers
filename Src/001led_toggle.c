@@ -5,27 +5,27 @@
  *      Author: Babanazar
  */
 #include "stm32f0discovery.h"
-#include "stm32f0discovery_gpio_driver.h"
+
 
 void delay(void)
 {
-	for(uint32_t i = 0; i < 500000; i++);
+	for(uint32_t i = 0; i < 1000000; i++);
 }
 
 int main(void)
 {
-	GPIO_Handle_t GpioLed;
+	GPIO_Handle_t gpioLed;
 
-	GpioLed.pGPIOx = GPIOC;
-	GpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
-	GpioLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
-	GpioLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
-	GpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
-	GpioLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPPD;
+	gpioLed.pGPIOx = GPIOC;
+	gpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
+	gpioLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+	gpioLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	gpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+	gpioLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPPD;
 
 	GPIO_PeriClockControl(GPIOC, ENABLE);
 
-	GPIO_Init(&GpioLed);
+	GPIO_Init(&gpioLed);
 
 	while(1)
 	{
