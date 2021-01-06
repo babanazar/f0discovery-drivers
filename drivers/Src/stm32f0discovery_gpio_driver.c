@@ -213,10 +213,36 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 /*
  * IRQ Configuration and ISR handling
  */
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDi)
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
-
+	if(ENABLE == EnorDi)
+	{
+		if(IRQNumber <= 31)
+		{
+			/* program ISER register */
+			*NVIC_ISER |= (1 << IRQNumber);
+		}
+	}
+	else
+	{
+		if(IRQNumber <= 31)
+		{
+			/* program ICER register */
+			*NVIC_ICER |= (1 << IRQNumber);
+		}
+	}
 }
+
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
+{
+	/* 1. First lets find out the ipr register */
+	uint8_t iprx = IRQNumber / 4;
+	uint8_t iprx_section = IRQNumber % 4;
+
+	uint8_t shift_amount = ( 8 * iprx_section ) + (8 - NO_PR_BITS_IMPLEMENTED);
+	*(NVIC_PR_BASE_ADDR + iprx * 4) |= ( IRQPriority << ( 8 * iprx_section) );
+}
+
 void GPIO_IRQHandling(uint8_t PinNumber)
 {
 

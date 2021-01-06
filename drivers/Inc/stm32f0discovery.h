@@ -13,6 +13,30 @@
 
 #define __IO volatile
 
+/************************START:Processor Specific Details****************************
+ *
+ * ARM Cortex Mx Processor NVIC ISER register addresses
+ */
+#define NVIC_ISER				((__IO uint32_t*)0xE000E100)
+
+
+/*
+ * ARM Cortex Mx Processor NVIC ICER register addresses
+ */
+#define NVIC_ICER				((__IO uint32_t*)0xE000E180)
+
+
+/*
+ * ARM Cortex Mx Processor Priority Register Address Calculation
+ */
+#define NVIC_PR_BASE_ADDR		((__IO uint32_t*)0xE000E400)
+
+
+/*
+ * ARM Cortex Mx Processor number of priority bits implemented in Priority Register
+ */
+#define NO_PR_BITS_IMPLEMENTED	4
+
 /*
  * base addresses of Flash and SRAM memories
  */
