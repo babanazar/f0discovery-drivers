@@ -55,6 +55,7 @@
  * Base addresses of peripherals which are hanging on APB2 bus
  */
 #define EXTI_BASEADDR			(APB2PERIPH_BASE + 0x0400)
+#define SYSCFG_BASEADDR			(APB2PERIPH_BASE)
 
 
 /*************************Peripheral Register Definition Structures*********************************/
@@ -104,6 +105,33 @@ typedef struct
 	__IO uint32_t CR2;
 }RCC_RegDef_t;
 
+
+/*
+ * Peripheral register definition structure for EXTI
+ */
+typedef struct
+{
+	__IO uint32_t IMR;
+	__IO uint32_t EMR;
+	__IO uint32_t RTSR;
+	__IO uint32_t FTSR;
+	__IO uint32_t SWIER;
+	__IO uint32_t PR;
+}EXTI_RegDef_t;
+
+
+/*
+ * Peripheral register definition structure for RCC
+ */
+typedef struct
+{
+	__IO uint32_t CFGR1;		/*!< Address offset: 0x00*/
+	uint32_t RESERVED;			/*!< Address offset: 0x04*/
+	__IO uint32_t EXTICR[4];	/*!< Address offset: 0x08-0x14*/
+	__IO uint32_t CFGR2;		/*!< Address offset: 0x18*/
+}SYSCFG_RegDef_t;
+
+
 /*
  * Peripheral Definitions
  */
@@ -116,6 +144,9 @@ typedef struct
 
 #define RCC							((RCC_RegDef_t*)RCC_BASEADDR)
 
+#define EXTI						((EXTI_RegDef_t*)EXTI_BASEADDR)
+
+#define SYSCFG						((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
 /*
  * Clock Enable Macros for GPIOx peripherals
@@ -131,7 +162,7 @@ typedef struct
 /*
  * Clock Enable Macros for I2Cx peripherals
  */
-#define I2C1_PCLK_EN()				(RCC->APB1ENR |= ())
+#define I2C1_PCLK_EN()				(RCC->APB2ENR |= (1 << 0))
 
 
 /*
@@ -142,6 +173,13 @@ typedef struct
 /*
  * Clock Enable Macros for USARTx peripherals
  */
+
+
+/*
+ * Clock Enable Macros for SYSCFG peripheral
+ */
+#define SYSCFG_PCLK_EN()	(RCC->APB2ENR)
+
 
 /*
  * Clock Disable Macros for SYSCFG peripheral
@@ -159,7 +197,21 @@ typedef struct
 
 
 /*
- * IRQ(Interrupt Request) Numbers of STM32F0Discovery MCY
+ * return port code for given GPIOx base address
+ * This macro returns a code (between 0 to 5) for a given GPIO base address(x)
+ */
+#define GPIO_BASEADDR_TO_CODE(x)  ( (x == GPIOA) ? 0 :\
+									(x == GPIOB) ? 1 :\
+									(x == GPIOC) ? 2 :\
+									(x == GPIOD) ? 3 :\
+									(x == GPIOE) ? 4 :\
+									(x == GPIOF) ? 5 :0 )
+
+
+
+
+/*
+ * IRQ(Interrupt Request) Numbers of STM32F0Discovery MCU
  *
  */
 #define IRQ_NO_EXTI0_1		5

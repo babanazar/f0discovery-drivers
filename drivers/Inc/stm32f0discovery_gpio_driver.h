@@ -66,9 +66,9 @@ typedef struct
 #define GPIO_MODE_OUT 		1
 #define GPIO_MODE_ALTFN 	2
 #define GPIO_MODE_ANALOG	3
-#define GPIO_MODE_IT_FD		4
-#define GPIO_MODE_IT_RD		5
-#define GPIO_MODE_IT_RFD	6
+#define GPIO_MODE_IT_FT		4
+#define GPIO_MODE_IT_RT		5
+#define GPIO_MODE_IT_RFT	6
 
 
 /*
