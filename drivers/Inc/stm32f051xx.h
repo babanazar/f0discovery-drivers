@@ -5,8 +5,8 @@
  *      Author: Babanazar
  */
 
-#ifndef INC_STM32F0DISCOVERY_H_
-#define INC_STM32F0DISCOVERY_H_
+#ifndef INC_STM32F051XX_H_
+#define INC_STM32F051XX_H_
 
 #include <stdint.h>
 
@@ -256,6 +256,6 @@ typedef struct
 #define GPIO_PIN_SET		SET
 #define GPIO_PIN_RESET		RESET
 
-#include "stm32f0discovery_gpio_driver.h"
+#include <stm32f051xx_gpio_driver.h>
 
-#endif /* INC_STM32F0DISCOVERY_H_ */
+#endif /* INC_STM32F051XX_H_ */

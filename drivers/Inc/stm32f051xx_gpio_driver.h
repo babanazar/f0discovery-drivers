@@ -5,10 +5,10 @@
  *      Author: Babanazar
  */
 
-#ifndef INC_STM32F0DISCOVERY_GPIO_DRIVER_H_
-#define INC_STM32F0DISCOVERY_GPIO_DRIVER_H_
+#ifndef INC_STM32F051XX_GPIO_DRIVER_H_
+#define INC_STM32F051XX_GPIO_DRIVER_H_
 
-#include "stm32f0discovery.h"
+#include <stm32f051xx.h>
 
 
 /*
@@ -129,4 +129,4 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority);
 
 void GPIO_IRQHandling(uint8_t PinNumber);
 
-#endif /* INC_STM32F0DISCOVERY_GPIO_DRIVER_H_ */
+#endif /* INC_STM32F051XX_GPIO_DRIVER_H_ */

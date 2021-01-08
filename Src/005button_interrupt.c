@@ -6,7 +6,7 @@
  */
 
 
-#include "stm32f0discovery.h"
+#include <stm32f051xx.h>
 
 #define HIGH			ENABLE
 #define BUTTON_PRESSED	HIGH
