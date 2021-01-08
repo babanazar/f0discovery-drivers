@@ -74,12 +74,14 @@
  */
 #define I2C1_BASEADDR			(APB1PERIPH_BASE + 0x5400)
 #define I2C2_BASEADDR			(APB1PERIPH_BASE + 0x5800)
+#define SPI2_BASEADDR			(APB1PERIPH_BASE + 0x3800)
 
 /*
  * Base addresses of peripherals which are hanging on APB2 bus
  */
-#define EXTI_BASEADDR			(APB2PERIPH_BASE + 0x0400)
 #define SYSCFG_BASEADDR			(APB2PERIPH_BASE)
+#define EXTI_BASEADDR			(APB2PERIPH_BASE + 0x0400)
+#define SPI1_BASEADDR			(APB2PERIPH_BASE + 0x3000)
 
 
 /*************************Peripheral Register Definition Structures*********************************/
@@ -145,7 +147,23 @@ typedef struct
 
 
 /*
- * Peripheral register definition structure for RCC
+ * Peripheral register definition structure for SPI
+ */
+typedef struct
+{
+	__IO uint32_t CR1;
+	__IO uint32_t CR2;
+	__IO uint32_t SR;
+	__IO uint32_t DR;
+	__IO uint32_t CRCPR;
+	__IO uint32_t RXCRCR;
+	__IO uint32_t TXCRCR;
+	__IO uint32_t I2SCFGR;
+	__IO uint32_t I2SSPR;
+}SPI_RegDef_t;
+
+/*
+ * Peripheral register definition structure for SYSCFG
  */
 typedef struct
 {
@@ -172,6 +190,9 @@ typedef struct
 
 #define SYSCFG						((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
+#define SPI1						((SPI_RegDef_t*)SPI1_BASEADDR)
+#define SPI2						((SPI_RegDef_t*)SPI2_BASEADDR)
+
 /*
  * Clock Enable Macros for GPIOx peripherals
  */
@@ -192,7 +213,8 @@ typedef struct
 /*
  * Clock Enable Macros for SPIx peripherals
  */
-
+#define SPI1_PCLOCK_EN()			(RCC->APB2ENR |= (1 << 12))
+#define SPI2_PCLOCK_EN()			(RCC->APB1ENR |= (1 << 14))
 
 /*
  * Clock Enable Macros for USARTx peripherals
@@ -257,5 +279,6 @@ typedef struct
 #define GPIO_PIN_RESET		RESET
 
 #include <stm32f051xx_gpio_driver.h>
+#include <stm32f051xx_spi_driver.h>
 
 #endif /* INC_STM32F051XX_H_ */
