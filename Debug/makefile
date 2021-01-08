@@ -28,11 +28,6 @@ endif
 
 -include ../makefile.defs
 
-BUILD_ARTIFACT_NAME := f0discovery-drivers
-BUILD_ARTIFACT_EXTENSION := elf
-BUILD_ARTIFACT_PREFIX := 
-BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
-
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
 f0discovery-drivers.elf \
@@ -48,14 +43,11 @@ f0discovery-drivers.bin \
 
 
 # All Target
-all: main-build
-
-# Main-build Target
-main-build: f0discovery-drivers.elf secondary-outputs
+all: f0discovery-drivers.elf secondary-outputs
 
 # Tool invocations
-f0discovery-drivers.elf: $(OBJS) $(USER_OBJS) C:\Users\Acer\Desktop\men\stm32\workspace\f0discovery-drivers\STM32F051R8TX_FLASH.ld
-	arm-none-eabi-gcc -o "f0discovery-drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Acer\Desktop\men\stm32\workspace\f0discovery-drivers\STM32F051R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f0discovery-drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+f0discovery-drivers.elf: $(OBJS) $(USER_OBJS) C:\Users\oguzh\Documents\MCU1-Course\MCU1\f0discovery-drivers\STM32F051R8TX_FLASH.ld
+	arm-none-eabi-gcc -o "f0discovery-drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\oguzh\Documents\MCU1-Course\MCU1\f0discovery-drivers\STM32F051R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f0discovery-drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -81,14 +73,7 @@ clean:
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
-fail-specified-linker-script-missing:
-	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
-	@exit 2
-
-warn-no-linker-script-specified:
-	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
-
-.PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
+.PHONY: all clean dependents
 .SECONDARY:
 
 -include ../makefile.targets
