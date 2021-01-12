@@ -9,8 +9,8 @@
 #include <string.h>
 
 /*
- * PB14 --> SPI2_MISO
  * PB15 -->	SPI2_MOSI
+ * PB14 --> SPI2_MISO
  * PB13 --> SPI2_SCK
  * PB12 --> SPI2_NSS
  * ALT function mode: 0
@@ -73,6 +73,10 @@ int main(void)
 	SPI_PeripheralControl(SPI2, ENABLE);
 
 	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
+
+	while( SPI_GetFlagStatus(SPI2, SPI_BUSY_FLAG) );
+
+	SPI_PeripheralControl(SPI2, DISABLE);
 
 	while(1);
 

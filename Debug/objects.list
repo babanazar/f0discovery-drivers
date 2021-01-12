@@ -1,6 +1,7 @@
-"Src/006spi_tx_testing.o"
+"Src/007spi_txonly_arduino.o"
 "Src/syscalls.o"
 "Src/sysmem.o"
 "Startup/startup_stm32f051r8tx.o"
 "drivers/Src/stm32f051xx_gpio_driver.o"
+"drivers/Src/stm32f051xx_i2c_driver.o"
 "drivers/Src/stm32f051xx_spi_driver.o"

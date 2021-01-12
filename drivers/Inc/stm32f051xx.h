@@ -175,6 +175,24 @@ typedef struct
 
 
 /*
+ * Peripheral register definition structure for I2C
+ */
+typedef struct
+{
+	__IO uint32_t CR1;
+	__IO uint32_t CR2;
+	__IO uint32_t OAR1;
+	__IO uint32_t OAR2;
+	__IO uint32_t TIMINGR;
+	__IO uint32_t TIMEOUTR;
+	__IO uint32_t ISR;
+	__IO uint32_t ICR;
+	__IO uint32_t PECR;
+	__IO uint32_t RXDR;
+	__IO uint32_t TXDR;
+}I2C_RegDef_t;
+
+/*
  * Peripheral Definitions
  */
 #define GPIOA 						((GPIO_RegDef_t*)GPIOA_BASEADDR)
@@ -193,6 +211,9 @@ typedef struct
 #define SPI1						((SPI_RegDef_t*)SPI1_BASEADDR)
 #define SPI2						((SPI_RegDef_t*)SPI2_BASEADDR)
 
+#define I2C1						((I2C_RegDef_t*)I2C1_BASEADDR)
+#define I2C2						((I2C_RegDef_t*)I2C2_BASEADDR)
+
 /*
  * Clock Enable Macros for GPIOx peripherals
  */
@@ -207,7 +228,8 @@ typedef struct
 /*
  * Clock Enable Macros for I2Cx peripherals
  */
-#define I2C1_PCLK_EN()				(RCC->APB2ENR |= (1 << 0))
+#define I2C1_PCLK_EN()				(RCC->APB1ENR |= (1 << 21))
+#define I2C2_PCLK_EN()				(RCC->APB1ENR |= (1 << 22))
 
 
 /*
@@ -334,7 +356,85 @@ typedef struct
 #define SPI_SR_FTLVL		11
 
 
+/*********************************************************************
+ * Bit position definitions of I2C peripheral
+ *********************************************************************/
+/*
+ * Bit position definitions of I2C_CR1
+ */
+#define I2C_CR1_PE					0
+#define I2C_CR1_TXIE				1
+#define I2C_CR1_RXIE				2
+#define I2C_CR1_ADDRIE				3
+#define I2C_CR1_NACKIE				4
+#define I2C_CR1_STOPIE				5
+#define I2C_CR1_TCIE				6
+#define I2C_CR1_ERRIE				7
+#define I2C_CR1_DNF					8
+#define I2C_CR1_ANFOFF				12
+#define I2C_CR1_TXDMAEN				14
+#define I2C_CR1_RXDMAEN				15
+#define I2C_CR1_SBC					16
+#define I2C_CR1_NOSTRETCH			17
+#define I2C_CR1_WUPEN				18
+#define I2C_CR1_GCEN				19
+#define I2C_CR1_SMBHEN				20
+#define I2C_CR1_SMBDEN				21
+#define I2C_CR1_ALERTEN				22
+#define I2C_CR1_PECEN				23
+
+
+/*
+ * Bit position definitions of I2C_CR2
+ */
+#define I2C_CR2_SADD				0
+#define I2C_CR2_RD_WRN				10
+#define I2C_CR2_ADD10				11
+#define I2C_CR2_HEAD10R				12
+#define I2C_CR2_START				13
+#define I2C_CR2_STOP				14
+#define I2C_CR2_NACK				15
+#define I2C_CR2_NBYTES				16
+#define I2C_CR2_RELOAD				24
+#define I2C_CR2_AUTOEND				25
+#define I2C_CR2_PECBYTE				26
+
+
+/*
+ * Bit position definitions of I2C_ISR
+ */
+#define I2C_ISR_TXE					0
+#define I2C_ISR_TXIS				1
+#define I2C_ISR_RXNE				2
+#define I2C_ISR_ADDR				3
+#define I2C_ISR_NACKF				4
+#define I2C_ISR_STOPF				5
+#define I2C_ISR_TC					6
+#define I2C_ISR_TCR					7
+#define I2C_ISR_BERR				8
+#define I2C_ISR_ARLO				9
+#define I2C_ISR_OVR					10
+#define I2C_ISR_PECERR				11
+#define I2C_ISR_TIMEOUT				12
+#define I2C_ISR_ALERT				13
+#define I2C_ISR_BUSY				15
+#define I2C_ISR_DIR					16
+#define I2C_ISR_ADDCODE				17
+
+
+/*
+ * Bit position definitions of I2C_RXDR
+ */
+#define I2C_RXDR_RX_DATA			0
+
+
+/*
+ * Bit position definitions of I2C_TXDR
+ */
+#define I2C_RXDR_TX_DATA			0
+
 #include <stm32f051xx_gpio_driver.h>
 #include <stm32f051xx_spi_driver.h>
+#include <stm32f051xx_i2c_driver.h>
 
 #endif /* INC_STM32F051XX_H_ */

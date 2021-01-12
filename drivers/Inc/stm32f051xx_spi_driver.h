@@ -94,6 +94,7 @@ typedef struct
  * SPI related status flags definitions
  */
 #define SPI_TXE_FLAG		(1 << SPI_SR_TXE)
+#define SPI_BUSY_FLAG		(1 << SPI_SR_BSY)
 
 
 /***************************************************************************************************
@@ -131,6 +132,8 @@ void SPI_IRQHandling(SPI_Handle_t *pHandle);
  * Other Peripheral Control APIs
  */
 void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
+void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
+void SPI_SSOEConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
 
 
 #endif /* INC_STM32F051XX_SPI_DRIVER_H_ */
